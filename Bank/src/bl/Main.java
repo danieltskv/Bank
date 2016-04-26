@@ -1,5 +1,7 @@
 package bl;
 
-public class Main {
+import org.omg.Messaging.SyncScopeHelper;
 
+public class Main {
+	test
 }
