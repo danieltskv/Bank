@@ -3,19 +3,20 @@ package bl;
 import java.time.LocalDateTime;
 
 public class Transaction {
+	enum TransactionType{Inner, Outer};
 	private static int transactionNumber = 0;
 	
 	private Account account;
 	private LocalDateTime timeOfTransaction;
 	private int amount;
 	private String bankRepresentative;
-	private String actionType;
+	private TransactionType type;
 	
-	public Transaction(Account account, int amount, String bankRepresentative, String actionType)  {
+	public Transaction(Account account, int amount, String bankRepresentative, TransactionType type)  {
 		this.account = account;
 		this.amount = amount;
 		this.bankRepresentative = bankRepresentative;
-		this.actionType = actionType;
+		this.type = type;
 		
 		this.timeOfTransaction = LocalDateTime.now();
 		Transaction.transactionNumber++;
@@ -61,12 +62,12 @@ public class Transaction {
 		this.bankRepresentative = bankRepresentative;
 	}
 
-	public String getActionType() {
-		return actionType;
+	public TransactionType getActionType() {
+		return type;
 	}
 
-	public void setActionType(String actionType) {
-		this.actionType = actionType;
+	public void setActionType(TransactionType type) {
+		this.type = type;
 	}
 	
 	
