@@ -18,7 +18,7 @@ public class Transaction {
 		this.actionType = actionType;
 		
 		this.timeOfTransaction = LocalDateTime.now();
-		this.transactionNumber++;
+		Transaction.transactionNumber++;
 	}
 
 	public static int getTransactionNumber() {
