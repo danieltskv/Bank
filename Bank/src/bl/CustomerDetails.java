@@ -3,12 +3,14 @@ package bl;
 import java.util.ArrayList;
 
 public class CustomerDetails {
+	private Long customerID;
 	private String customerName;
 	private ArrayList<Account> accounts;
 	private Address address;
 	private Long phoneNumber;
 	
-	public CustomerDetails(String customerName, Address address, Long phoneNumber) {
+	public CustomerDetails(Long customerID, String customerName, Address address, Long phoneNumber) {
+		this.customerID = customerID;
 		this.customerName = customerName;
 		this.address = address;
 		this.phoneNumber = phoneNumber;
@@ -57,6 +59,9 @@ public class CustomerDetails {
 		return "CustomerDetails [customerName=" + customerName + ", accounts=" + accounts + ", address=" + address
 				+ ", phoneNumber=" + phoneNumber + "]";
 	}
-	
-	
+
+	public Long getCustomerID() {
+		return customerID;
+	}
+
 }

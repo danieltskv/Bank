@@ -1,5 +1,64 @@
 package controllers;
 
-public interface webController {
-	
+public interface BlController {
+	void connect(int userID, int userPass) throws Exception;
+	/*
+	 * Exceptions: connection errors, no such id, incorrect password
+	 */
+	void transactionOut (int sourceAccountNumber, int targetAccountNumber) throws Exception;
+	/*
+	 * Exceptions: no such target account, no such source account, insufficient funds
+	 */
+	void transactionIn (int targetAccountNumber) throws Exception; //outer system use
+	/*
+	 * Exceptions: no such target account
+	 */
+	String getGeneralReport();
+	/* 
+	 * json, no exceptions
+	 */
+	void openAccount(Long customerID, String customerName, String city, String street, int apartmentNumber, Long phoneNumber);
+	/* 
+	 * BL team
+	 * Simplification: if existing customer by details, 
+	 * add another account to the same customer
+	 */
+	/*
+	 * Exceptions: account isn't valid (to fit use case)
+	 */
+	void initiateMonthlyTransaction();
+	/* 
+	 * timer use, assumes there's always sufficient funds
+	 */
+	void requestLoan(int accountID, int amount) throws Exception;
+	/*
+	 * Exceptions: no such account
+	 */
+	String getLoanRequestDetails() throws Exception;//json
+	/*
+	 * Exceptions: no loan requests in the system
+	 */
+	void loanApproval(int loanRequestID, int numberOfMonthlyPayments);
+	/*
+	 * No exception, app logic protects from errors (no input, approve/reject only)
+	 */
+	void createDeposit(int accountID, int amount) throws Exception;
+	/*
+	 * Exceptions: no such account, insufficient funds
+	 */
+	void closeAccount(int accountID) throws Exception;
+	/*
+	 * Exceptions: no such account, debt, remainder (need to transact first) - update use case & sequence diagram
+	 */
+	void createRestriction(int loanID, int amount); 
+	/* 
+	 * BL team 
+	 * Simplification: highest payment (sequence diagram) can be of the
+	 * highest payment of all loans for this account 
+	 * (due to "return plan" modification to be just a monthly constant payment for each loan)
+	 */
+	void cancelRestriction(int restrictionID) throws Exception;
+	/*
+	 * Exceptions: no such restriction
+	 */
 }

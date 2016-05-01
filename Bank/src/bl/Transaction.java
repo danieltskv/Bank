@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class Transaction {
 	enum TransactionType{Inner, Outer};
-	private static int transactionNumber = 0;
+	private static int transactionID = 0;
 	
 	private Account account;
 	private LocalDateTime timeOfTransaction;
@@ -19,15 +19,11 @@ public class Transaction {
 		this.type = type;
 		
 		this.timeOfTransaction = LocalDateTime.now();
-		Transaction.transactionNumber++;
+		transactionID++;
 	}
 
-	public static int getTransactionNumber() {
-		return transactionNumber;
-	}
-
-	public static void setTransactionNumber(int transactionNumber) {
-		Transaction.transactionNumber = transactionNumber;
+	public static int getTransactionID() {
+		return transactionID;
 	}
 
 	public Account getAccount() {
@@ -40,10 +36,6 @@ public class Transaction {
 
 	public LocalDateTime getTimeOfTransaction() {
 		return timeOfTransaction;
-	}
-
-	public void setTimeOfTransaction(LocalDateTime timeOfTransaction) {
-		this.timeOfTransaction = timeOfTransaction;
 	}
 
 	public int getAmount() {

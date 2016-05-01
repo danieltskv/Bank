@@ -18,18 +18,8 @@ public class CloseAccount {
 		return timeOfClose;
 	}
 
-	/*
-	public void setTimeOfClose(LocalDateTime timeOfClose) {
-		this.timeOfClose = timeOfClose;
-	}
-	*/
-
 	public Account getAccount() {
 		return account;
-	}
-
-	public void setAccount(Account account) {
-		this.account = account;
 	}
 
 	public String getReason() {

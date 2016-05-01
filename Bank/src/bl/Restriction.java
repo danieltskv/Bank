@@ -1,6 +1,8 @@
 package bl;
 
 public class Restriction {
+	private static int restrictionID = 0;
+
 	private Account account;
 	private int amount;
 	private Loan loan;
@@ -9,6 +11,8 @@ public class Restriction {
 		this.account = account;
 		this.amount = amount;
 		this.loan = loan;
+		
+		restrictionID++;
 	}
 	
 	public void updateAmount(int amount) {
@@ -18,11 +22,7 @@ public class Restriction {
 	public Account getAccount() {
 		return account;
 	}
-/*
-	public void setAccount(Account account) {
-		this.account = account;
-	}
-*/
+
 	public int getAmount() {
 		return amount;
 	}
@@ -34,15 +34,15 @@ public class Restriction {
 	public Loan getLoan() {
 		return loan;
 	}
-/*
-	public void setLoan(Loan loan) {
-		this.loan = loan;
-	}
-*/
+
 
 	@Override
 	public String toString() {
 		return "Restriction [account=" + account + ", amount=" + amount + ", loan=" + loan + "]";
-	}	
-	
+	}
+
+	public static int getRestrictionID() {
+		return restrictionID;
+	}
+
 }
