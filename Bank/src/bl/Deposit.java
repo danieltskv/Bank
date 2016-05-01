@@ -35,4 +35,9 @@ public class Deposit {
 	public void closeAndWithdrew() {
 		
 	}
+
+	@Override
+	public String toString() {
+		return "Deposit [account=" + account + ", depositBalance=" + depositBalance + "]";
+	}
 }

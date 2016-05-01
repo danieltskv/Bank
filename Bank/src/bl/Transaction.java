@@ -69,6 +69,12 @@ public class Transaction {
 	public void setActionType(TransactionType type) {
 		this.type = type;
 	}
+
+	@Override
+	public String toString() {
+		return "Transaction [account=" + account + ", timeOfTransaction=" + timeOfTransaction + ", amount=" + amount
+				+ ", bankRepresentative=" + bankRepresentative + ", type=" + type + "]";
+	}
 	
 	
 	

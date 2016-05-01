@@ -73,6 +73,12 @@ public class Loan {
 	public void setLoanReturns(ArrayList<LoanReturn> loanReturns) {
 		this.loanReturns = loanReturns;
 	}
+
+	@Override
+	public String toString() {
+		return "Loan [account=" + account + ", loanBalance=" + loanBalance + ", loanReturns=" + loanReturns
+				+ ", loanStatus=" + loanStatus + "]";
+	}
 	
 	
 	 

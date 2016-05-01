@@ -60,6 +60,11 @@ public class LoanReturn {
 	public void setTimeOfTransaction(LocalDateTime timeOfTransaction) {
 		this.timeOfTransaction = timeOfTransaction;
 	}
-*/	
+*/
+
+	@Override
+	public String toString() {
+		return "LoanReturn [loan=" + loan + ", timeOfTransaction=" + timeOfTransaction + ", amount=" + amount + "]";
+	}	
 	
  }

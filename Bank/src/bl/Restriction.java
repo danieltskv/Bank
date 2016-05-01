@@ -38,6 +38,11 @@ public class Restriction {
 	public void setLoan(Loan loan) {
 		this.loan = loan;
 	}
-*/	
+*/
+
+	@Override
+	public String toString() {
+		return "Restriction [account=" + account + ", amount=" + amount + ", loan=" + loan + "]";
+	}	
 	
 }

@@ -34,6 +34,11 @@ public class Address {
 	public void setApartmentNumber(int apartmentNumber) {
 		this.apartmentNumber = apartmentNumber;
 	}
+
+	@Override
+	public String toString() {
+		return "Address [city=" + city + ", street=" + street + ", apartmentNumber=" + apartmentNumber + "]";
+	}
 	
 	
 }

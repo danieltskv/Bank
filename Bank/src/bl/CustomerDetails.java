@@ -51,6 +51,12 @@ public class CustomerDetails {
 	public void setPhoneNumber(Long phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+
+	@Override
+	public String toString() {
+		return "CustomerDetails [customerName=" + customerName + ", accounts=" + accounts + ", address=" + address
+				+ ", phoneNumber=" + phoneNumber + "]";
+	}
 	
 	
 }

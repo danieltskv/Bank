@@ -24,4 +24,9 @@ public class LoanRequest {
 	public void setRequestedAmount(int requestedAmount) {
 		this.requestedAmount = requestedAmount;
 	}
+
+	@Override
+	public String toString() {
+		return "LoanRequest [account=" + account + ", requestedAmount=" + requestedAmount + "]";
+	}
 }

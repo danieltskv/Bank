@@ -39,6 +39,11 @@ public class CloseAccount {
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
+
+	@Override
+	public String toString() {
+		return "CloseAccount [timeOfClose=" + timeOfClose + ", account=" + account + ", reason=" + reason + "]";
+	}
 	
 	
 	
