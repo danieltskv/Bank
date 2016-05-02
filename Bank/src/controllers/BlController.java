@@ -1,15 +1,16 @@
 package controllers;
 
 public interface BlController {
-	void connect(int userID, int userPass) throws Exception;
+	Integer connect(int userID, int userPass, String type) throws Exception;
 	/*
 	 * Exceptions: connection errors, no such id, incorrect password
+	 * integer = account ID if customer and null if clerk
 	 */
-	void transactionOut (int sourceAccountNumber, int targetAccountNumber) throws Exception;
+	void transactionOut (int sourceAccountNumber, int targetAccountNumber, int amount) throws Exception;
 	/*
 	 * Exceptions: no such target account, no such source account, insufficient funds
 	 */
-	void transactionIn (int targetAccountNumber) throws Exception; //outer system use
+	void transactionIn (int targetAccountNumber, int amount) throws Exception; //outer system use
 	/*
 	 * Exceptions: no such target account
 	 */
@@ -17,7 +18,7 @@ public interface BlController {
 	/* 
 	 * json, no exceptions
 	 */
-	void openAccount(Long customerID, String customerName, String city, String street, int apartmentNumber, Long phoneNumber);
+	int openAccount(Long customerID, String customerName, String city, String street, int apartmentNumber, Long phoneNumber);
 	/* 
 	 * BL team
 	 * Simplification: if existing customer by details, 
@@ -25,6 +26,7 @@ public interface BlController {
 	 */
 	/*
 	 * Exceptions: account isn't valid (to fit use case)
+	 * return the account ID
 	 */
 	void initiateMonthlyTransaction();
 	/* 
@@ -40,7 +42,7 @@ public interface BlController {
 	 */
 	void loanApproval(int loanRequestID, int numberOfMonthlyPayments);
 	/*
-	 * No exception, app logic protects from errors (no input, approve/reject only)
+	 * No exception, app logic protects errors (no input, approve/reject only)
 	 */
 	void createDeposit(int accountID, int amount) throws Exception;
 	/*
@@ -50,15 +52,18 @@ public interface BlController {
 	/*
 	 * Exceptions: no such account, debt, remainder (need to transact first) - update use case & sequence diagram
 	 */
-	void createRestriction(int loanID, int amount); 
-	/* 
+/*	
+ 	Removing from use cases and doing the restriction internally, at the value of each monthly return, one per loan
+ 	void createRestriction(int loanID, int amount); 
+	
 	 * BL team 
 	 * Simplification: highest payment (sequence diagram) can be of the
 	 * highest payment of all loans for this account 
 	 * (due to "return plan" modification to be just a monthly constant payment for each loan)
-	 */
+	 
 	void cancelRestriction(int restrictionID) throws Exception;
-	/*
+	
 	 * Exceptions: no such restriction
-	 */
+	 
+*/
 }
