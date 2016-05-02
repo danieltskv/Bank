@@ -30,7 +30,7 @@ public interface BlController {
 	 */
 	void initiateMonthlyTransaction();
 	/* 
-	 * timer use, assumes there's always sufficient funds
+	 * timer use, assumes there's always sufficient funds (because of restriction)
 	 */
 	void requestLoan(int accountID, int amount) throws Exception;
 	/*
