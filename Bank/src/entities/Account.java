@@ -22,8 +22,6 @@ public class Account {
 
 	private int accountID;
 
-	private Object theMutex;
-
 	public Account(CustomerDetails customer){
 		this.customer = customer;
 		this.balance = 0;
@@ -39,14 +37,14 @@ public class Account {
 	}
 
 	public void addLoan(Loan loan) {
-		synchronized (theMutex) {
+		synchronized (this) {
 			loans.add(loan);
 			numberOfActiveLoans++;
 		}
 	}
 
 	public void returnLoan() throws Exception {
-		synchronized (theMutex) {
+		synchronized (this) {
 			if (numberOfActiveLoans == 0) 
 				throw new Exception("No loans to return!");
 
@@ -71,7 +69,7 @@ public class Account {
 	}
 
 	public void withdrawFromDeposit(int amountToWithdraw) throws Exception {
-		synchronized (theMutex) {
+		synchronized (this) {
 			int totalDepositedAmount = 0;
 			int numberOfDesposits = deposits.size();
 			for (int i = 0; i < numberOfDesposits; i++)
@@ -99,7 +97,7 @@ public class Account {
 	}
 
 	public void closeAccount() throws Exception {
-		synchronized (theMutex) {
+		synchronized (this) {
 			if (getAccountBalance() != 0) 
 				throw new Exception("Balance is different from 0!");
 
@@ -119,7 +117,7 @@ public class Account {
 	}
 
 	public void addRestriction(Restriction restriction) throws Exception {
-		synchronized (theMutex) {
+		synchronized (this) {
 			if (isRestricted && (restriction.getAmount() < getRestriction().getAmount())) //only one restriction, the highest possible
 				return;
 
@@ -133,7 +131,7 @@ public class Account {
 	}
 
 	public void cancelRestriction() throws Exception {
-		synchronized (theMutex) {
+		synchronized (this) {
 			if (!isRestricted)
 				throw new Exception("Account isn't restricted!");
 
@@ -144,7 +142,7 @@ public class Account {
 	}
 
 	public void withdrawOrDeposit(int amount) throws Exception {
-		synchronized (theMutex) {
+		synchronized (this) {
 			if (amount > getAccountBalance())
 				throw new Exception("Insufficient funds!");
 
@@ -154,7 +152,7 @@ public class Account {
 
 
 	public void addDeposit(Deposit deposit) throws Exception {
-		synchronized (theMutex) {
+		synchronized (this) {
 			if (deposit.getDepositBalance() > getAccountBalance())
 				throw new Exception("Insufficient funds to deposit this amount!");
 
