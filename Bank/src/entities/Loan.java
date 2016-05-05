@@ -1,4 +1,6 @@
-package bl;
+package entities;
+
+import java.util.Arrays;
 
 public class Loan {
 	private enum LoanStatus{Open, Partially_Paid, Fully_Paid, Closed};
@@ -8,10 +10,12 @@ public class Loan {
 	private LoanReturn[] loanReturns;
 	private int currentPayment;
 	private LoanStatus loanStatus;
+	private int loanRequestID;
+	
 	private int loanID;
 	
 	public Loan(int loanRequestID, Account account, int loanBalance, int numberOfMonthlyPayments) {
-		this.loanID = loanRequestID;
+		this.loanRequestID = loanRequestID;
 		this.account = account;
 		this.loanBalance = loanBalance;
 		this.currentPayment = 0;
@@ -19,7 +23,7 @@ public class Loan {
 		
 		this.loanStatus = LoanStatus.Open;
 		
-		
+		/* Loan ID set after creation according to DB */
 	}
 
 	public void updateLoanBalance(int amount) {
@@ -31,12 +35,6 @@ public class Loan {
 	}
 	
 	public void closeLoan() throws Exception { 
-		/*
-		 * Simplification: this method is not in the use case and hence
-		 * badly defined (why do we need to close a loan? 
-		 * when will we not be able to?), 
-		 * consider removing it from the object model, no need for it.
-		 */
 		if (getLoanBalance() == 0)
 			setLoanStatus(LoanStatus.Closed);
 		else
@@ -51,9 +49,13 @@ public class Loan {
 			setLoanStatus(LoanStatus.Partially_Paid);
 		}
 	}
-	
+
 	public Account getAccount() {
 		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 
 	public int getLoanBalance() {
@@ -64,6 +66,22 @@ public class Loan {
 		this.loanBalance = loanBalance;
 	}
 
+	public LoanReturn[] getLoanReturns() {
+		return loanReturns;
+	}
+
+	public void setLoanReturns(LoanReturn[] loanReturns) {
+		this.loanReturns = loanReturns;
+	}
+
+	public int getCurrentPayment() {
+		return currentPayment;
+	}
+
+	public void setCurrentPayment(int currentPayment) {
+		this.currentPayment = currentPayment;
+	}
+
 	public LoanStatus getLoanStatus() {
 		return loanStatus;
 	}
@@ -72,24 +90,34 @@ public class Loan {
 		this.loanStatus = loanStatus;
 	}
 
+	public int getLoanRequestID() {
+		return loanRequestID;
+	}
 
+	public void setLoanRequestID(int loanRequestID) {
+		this.loanRequestID = loanRequestID;
+	}
+
+	public int getLoanID() {
+		return loanID;
+	}
+
+	public void setLoanID(int loanID) {
+		this.loanID = loanID;
+	}
 
 	@Override
 	public String toString() {
-		return "Loan [account=" + account + ", loanBalance=" + loanBalance + ", loanReturns=" + loanReturns
-				+ ", loanStatus=" + loanStatus + "]";
+		return "Loan [account=" + account + ", loanBalance=" + loanBalance + ", loanReturns="
+				+ Arrays.toString(loanReturns) + ", currentPayment=" + currentPayment + ", loanStatus=" + loanStatus
+				+ ", loanRequestID=" + loanRequestID + ", loanID=" + loanID + "]";
 	}
 
-	public LoanReturn[] getLoanReturns() {
-		return loanReturns;
-	}
-
-	public int getCurrentPayment() {
-		return currentPayment;
-	}
-
-	public int getLoadID() {
-		return loanID;
+	public boolean isActive() {
+		if (loanStatus == LoanStatus.Closed)
+			return false;
+		else
+			return true;
 	}
 
 	 

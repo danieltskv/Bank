@@ -1,25 +1,27 @@
-package bl;
+package entities;
 
 import java.util.ArrayList;
 
 public class CustomerDetails {
-	private Long customerID;
 	private String customerName;
 	private ArrayList<Account> accounts;
 	private Address address;
 	private Long phoneNumber;
 	
-	public CustomerDetails(Long customerID, String customerName, Address address, Long phoneNumber) {
-		this.customerID = customerID;
+	private int customerID;
+	
+	public CustomerDetails(String customerName, Address address, Long phoneNumber) {
 		this.customerName = customerName;
 		this.address = address;
 		this.phoneNumber = phoneNumber;
 		
 		this.accounts = new ArrayList<>();
+		
+		/* customer ID set after creation according to DB */
 	}
 	
 	public void addAccountToCustomer(Account account) {
-		this.accounts.add(account);
+		getAccounts().add(account);
 	}
 
 	public String getCustomerName() {
@@ -54,14 +56,19 @@ public class CustomerDetails {
 		this.phoneNumber = phoneNumber;
 	}
 
+	public int getCustomerID() {
+		return customerID;
+	}
+
+	public void setCustomerID(int customerID) {
+		this.customerID = customerID;
+	}
+
 	@Override
 	public String toString() {
 		return "CustomerDetails [customerName=" + customerName + ", accounts=" + accounts + ", address=" + address
-				+ ", phoneNumber=" + phoneNumber + "]";
+				+ ", phoneNumber=" + phoneNumber + ", customerID=" + customerID + "]";
 	}
 
-	public Long getCustomerID() {
-		return customerID;
-	}
 
 }

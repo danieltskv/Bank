@@ -1,4 +1,4 @@
-package bl;
+package other;
 
 
 public class Main {

@@ -1,4 +1,4 @@
-package bl;
+package boundaries;
 
 public class OuterSystemBoundary {
 
