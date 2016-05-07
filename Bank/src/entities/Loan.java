@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class Loan {
 	private enum LoanStatus{Open, Partially_Paid, Fully_Paid, Closed};
 
+	private int initialAmount;
 	private Account account;
 	private int loanBalance;
 	private LoanReturn[] loanReturns;
@@ -14,10 +15,11 @@ public class Loan {
 	
 	private int loanID;
 	
-	public Loan(int loanRequestID, Account account, int loanBalance, int numberOfMonthlyPayments) {
+	public Loan(int loanRequestID, Account account, int initialAmount, int numberOfMonthlyPayments) {
 		this.loanRequestID = loanRequestID;
 		this.account = account;
-		this.loanBalance = loanBalance;
+		this.setInitialAmount(initialAmount);
+		this.loanBalance = initialAmount;
 		this.currentPayment = 0;
 		this.loanReturns = new LoanReturn[numberOfMonthlyPayments];
 		
@@ -106,6 +108,13 @@ public class Loan {
 		this.loanID = loanID;
 	}
 
+	public boolean isActive() {
+		if (loanStatus == LoanStatus.Closed)
+			return false;
+		else
+			return true;
+	}
+
 	@Override
 	public String toString() {
 		return "Loan [account=" + account + ", loanBalance=" + loanBalance + ", loanReturns="
@@ -113,11 +122,12 @@ public class Loan {
 				+ ", loanRequestID=" + loanRequestID + ", loanID=" + loanID + "]";
 	}
 
-	public boolean isActive() {
-		if (loanStatus == LoanStatus.Closed)
-			return false;
-		else
-			return true;
+	public int getInitialAmount() {
+		return initialAmount;
+	}
+
+	public void setInitialAmount(int initialAmount) {
+		this.initialAmount = initialAmount;
 	}
 
 	 

@@ -28,18 +28,20 @@ public class Account {
 		this.numberOfActiveLoans = 0;
 		this.timeOfOpening = LocalDateTime.now();
 		this.status = AccountStatus.Open;
+		
+		
 
 		this.loans = new ArrayList<Loan>();
 		this.deposits = new ArrayList<Deposit>();
 
 		/* Account ID set after creation according to DB */
-
 	}
 
-	public void addLoan(Loan loan) {
+	public void addLoan(Loan loan) throws Exception {
 		synchronized (this) {
 			loans.add(loan);
 			numberOfActiveLoans++;
+			withdrawOrDeposit(loan.getInitialAmount());
 		}
 	}
 
@@ -61,7 +63,7 @@ public class Account {
 			if (loanToReturn == null) 
 				throw new Exception("Insufficient funds to return a loan!");
 
-			withdrawOrDeposit(loanToReturn.getLoanBalance());
+			withdrawOrDeposit(loanToReturn.getLoanBalance()*-1);
 			loanToReturn.setLoanBalance(0);
 			loanToReturn.closeLoan();
 			numberOfActiveLoans--;
@@ -143,7 +145,7 @@ public class Account {
 
 	public void withdrawOrDeposit(int amount) throws Exception {
 		synchronized (this) {
-			if (amount > getAccountBalance())
+			if ((amount < 0) && amount*-1 > getAccountBalance())
 				throw new Exception("Insufficient funds!");
 
 			this.balance += amount;
@@ -156,6 +158,7 @@ public class Account {
 			if (deposit.getDepositBalance() > getAccountBalance())
 				throw new Exception("Insufficient funds to deposit this amount!");
 
+			withdrawOrDeposit(deposit.getDepositBalance()*-1);
 			deposits.add(deposit);
 		}
 	}
@@ -238,14 +241,6 @@ public class Account {
 		this.accountID = accountID;
 	}
 
-	@Override
-	public String toString() {
-		return "Account [customer=" + customer + ", balance=" + balance + ", loans=" + loans + ", isRestricted="
-				+ isRestricted + ", restriction=" + restriction + ", deposits=" + deposits + ", status=" + status
-				+ ", timeOfTransaction=" + timeOfOpening + ", timeOfClosing=" + timeOfClosing + ", status=" + status
-				+ ", accountID=" + accountID + "]";
-	}
-
 	public int getNumberOfActiveLoans() {
 		return numberOfActiveLoans;
 	}
@@ -256,6 +251,14 @@ public class Account {
 
 	public int getNumberOfActiveDeposits() {
 		return deposits.size();
+	}
+
+	@Override
+	public String toString() {
+		return "Account [customer=" + customer + ", balance=" + balance + ", numberOfActiveLoans="
+				+ numberOfActiveLoans + ", isRestricted=" + isRestricted + ", restriction=" + restriction
+				+ ", timeOfOpening=" + timeOfOpening + ", timeOfClosing=" + timeOfClosing
+				+ ", status=" + status + ", accountID=" + accountID + "]";
 	}
 
 }

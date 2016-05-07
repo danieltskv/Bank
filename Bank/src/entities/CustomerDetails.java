@@ -1,27 +1,28 @@
 package entities;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class CustomerDetails {
 	private String customerName;
 	private ArrayList<Account> accounts;
 	private Address address;
-	private Long phoneNumber;
+	private long phoneNumber;
 	
 	private int customerID;
 	
-	public CustomerDetails(String customerName, Address address, Long phoneNumber) {
+	public CustomerDetails(String customerName, Address address, long phoneNumber) {
 		this.customerName = customerName;
 		this.address = address;
 		this.phoneNumber = phoneNumber;
 		
-		this.accounts = new ArrayList<>();
+		this.accounts = new ArrayList<Account>();
 		
 		/* customer ID set after creation according to DB */
 	}
 	
 	public void addAccountToCustomer(Account account) {
-		getAccounts().add(account);
+		accounts.add(account);
 	}
 
 	public String getCustomerName() {
@@ -66,7 +67,7 @@ public class CustomerDetails {
 
 	@Override
 	public String toString() {
-		return "CustomerDetails [customerName=" + customerName + ", accounts=" + accounts + ", address=" + address
+		return "CustomerDetails [customerName=" + customerName + ", address=" + address
 				+ ", phoneNumber=" + phoneNumber + ", customerID=" + customerID + "]";
 	}
 
