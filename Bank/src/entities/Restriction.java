@@ -54,5 +54,4 @@ public class Restriction {
 				+ restrictionID + "]";
 	}
 
-	/* Should the restriction remove the amount from the account and return it back once cancelled? */
 }

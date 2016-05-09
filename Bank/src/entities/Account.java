@@ -189,6 +189,10 @@ public class Account {
 
 	public void setIsRestricted(boolean isRestricted) {
 		this.isRestricted = isRestricted;
+		if (isRestricted)
+			this.status = AccountStatus.Restricted; 
+		else
+			this.status = AccountStatus.Open;
 	}
 
 	public Restriction getRestriction() {
@@ -256,7 +260,7 @@ public class Account {
 	@Override
 	public String toString() {
 		return "Account [customer=" + customer + ", balance=" + balance + ", numberOfActiveLoans="
-				+ numberOfActiveLoans + ", isRestricted=" + isRestricted + ", restriction=" + restriction
+				+ numberOfActiveLoans + ", isRestricted=" + isRestricted
 				+ ", timeOfOpening=" + timeOfOpening + ", timeOfClosing=" + timeOfClosing
 				+ ", status=" + status + ", accountID=" + accountID + "]";
 	}

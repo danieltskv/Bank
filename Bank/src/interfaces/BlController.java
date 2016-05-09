@@ -1,6 +1,6 @@
-package controllers;
+package interfaces;
 
-public interface BlController {
+public interface BlController /*unused*/{
 	Integer connect(int userID, int userPass, String type) throws Exception;
 	/*
 	 * Exceptions: connection errors, no such id, incorrect password
