@@ -1,6 +1,6 @@
-package bl;
+package managers;
 
-import controllers.BlController;
+import interfaces.BlController;
 
 public class ServerManager implements BlController {
 

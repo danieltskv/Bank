@@ -1,20 +1,21 @@
-package bl;
+package entities;
 
 public class LoanRequest {
 	enum LoanRequestStatus{Open, Rejected, Approved};
-	private static int loanRequestID = 0;
 
 	private Account account;
 	private int requestedAmount;
 	private LoanRequestStatus loanRequestStatus;
-
+	
+	private int loanRequestID;
 	
 	public LoanRequest(Account account, int requestAmount) {
 		this.account = account;
 		this.requestedAmount = requestAmount;
 		
-		loanRequestID++;
 		this.loanRequestStatus = LoanRequestStatus.Open;
+		
+		/* LoanRequest ID set after creation according to DB */
 	}
 
 	public Account getAccount() {
@@ -33,15 +34,6 @@ public class LoanRequest {
 		this.requestedAmount = requestedAmount;
 	}
 
-	@Override
-	public String toString() {
-		return "LoanRequest [account=" + account + ", requestedAmount=" + requestedAmount + "]";
-	}
-
-	public static int getLoanRequestID() {
-		return loanRequestID;
-	}
-
 	public LoanRequestStatus getLoanRequestStatus() {
 		return loanRequestStatus;
 	}
@@ -49,5 +41,20 @@ public class LoanRequest {
 	public void setLoanRequestStatus(LoanRequestStatus loanRequestStatus) {
 		this.loanRequestStatus = loanRequestStatus;
 	}
+
+	public int getLoanRequestID() {
+		return loanRequestID;
+	}
+
+	public void setLoanRequestID(int loanRequestID) {
+		this.loanRequestID = loanRequestID;
+	}
+
+	@Override
+	public String toString() {
+		return "LoanRequest [account=" + account + ", requestedAmount=" + requestedAmount + ", loanRequestStatus="
+				+ loanRequestStatus + ", loanRequestID=" + loanRequestID + "]";
+	}
+
 
 }

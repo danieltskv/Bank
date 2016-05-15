@@ -1,6 +1,6 @@
-package controllers;
+package interfaces;
 
-public interface BlController {
+public interface BlController /*unused*/{
 	Integer connect(int userID, int userPass, String type) throws Exception;
 	/*
 	 * Exceptions: connection errors, no such id, incorrect password
@@ -50,7 +50,7 @@ public interface BlController {
 	 */
 	void closeAccount(int accountID) throws Exception;
 	/*
-	 * Exceptions: no such account, debt, remainder (need to transact first) - update use case & sequence diagram
+	 * Exceptions: no such account, active loans, deposits, debt, remainder (need to transact first) - update use case & sequence diagram
 	 */
 /*	
  	Removing from use cases and doing the restriction internally, at the value of each monthly return, one per loan

@@ -1,16 +1,17 @@
-package bl;
+package entities;
 
 import java.time.LocalDateTime;
 
 public class Transaction {
 	enum TransactionType{Inner, Outer};
-	private static int transactionID = 0;
-	
+
+	private TransactionType type;
 	private Account account;
 	private LocalDateTime timeOfTransaction;
 	private int amount;
 	private String bankRepresentative;
-	private TransactionType type;
+	
+	private int transactionID;
 	
 	public Transaction(Account account, int amount, String bankRepresentative, TransactionType type)  {
 		this.account = account;
@@ -19,11 +20,23 @@ public class Transaction {
 		this.type = type;
 		
 		this.timeOfTransaction = LocalDateTime.now();
-		transactionID++;
+		/* transaction ID set after creation according to DB */
 	}
 
-	public static int getTransactionID() {
+	public TransactionType getType() {
+		return type;
+	}
+
+	public void setType(TransactionType type) {
+		this.type = type;
+	}
+
+	public int getTransactionID() {
 		return transactionID;
+	}
+
+	public void setTransactionID(int transactionID) {
+		this.transactionID = transactionID;
 	}
 
 	public Account getAccount() {
@@ -36,6 +49,10 @@ public class Transaction {
 
 	public LocalDateTime getTimeOfTransaction() {
 		return timeOfTransaction;
+	}
+
+	public void setTimeOfTransaction(LocalDateTime timeOfTransaction) {
+		this.timeOfTransaction = timeOfTransaction;
 	}
 
 	public int getAmount() {
@@ -54,18 +71,11 @@ public class Transaction {
 		this.bankRepresentative = bankRepresentative;
 	}
 
-	public TransactionType getActionType() {
-		return type;
-	}
-
-	public void setActionType(TransactionType type) {
-		this.type = type;
-	}
-
 	@Override
 	public String toString() {
-		return "Transaction [account=" + account + ", timeOfTransaction=" + timeOfTransaction + ", amount=" + amount
-				+ ", bankRepresentative=" + bankRepresentative + ", type=" + type + "]";
+		return "Transaction [type=" + type + ", account=" + account + ", timeOfTransaction=" + timeOfTransaction
+				+ ", amount=" + amount + ", bankRepresentative=" + bankRepresentative + ", transactionID="
+				+ transactionID + "]";
 	}
 	
 	
